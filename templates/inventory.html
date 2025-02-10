@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Inventory - NESIS{% endblock %}
+
+{% block content %}
+<section class="container">
+<h2 class="mb-4">Inventory</h2>
+
+<!-- Filters -->
+<form method="GET" class="mb-3">
+    <div class="row" >
+        <div class="col-md-4">
+            <input type="text" name="search" class="form-control" placeholder="Search..." value="{{ request.GET.search }}">
+        </div>
+        <div class="col-md-3">
+            <select name="category" class="form-select">
+                <option value="">All Categories</option>
+                <option value="satellites">Satellites</option>
+                <option value="sensors">Sensors</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <select name="status" class="form-select">
+                <option value="">All Status</option>
+                <option value="active">Active</option>
+                <option value="retired">Retired</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Filter</button>
+        </div>
+    </div>
+</form>
+
+<!-- Inventory Grid -->
+<div class="row" >
+    {% for asset in assets %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <img src="{{ asset.image.url }}" class="card-img-top" alt="{{ asset.name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ asset.name }}</h5>
+                <p class="card-text">{{ asset.description|truncatewords:15 }}</p>
+                <a href="{% url 'asset_detail' asset.id %}" class="btn btn-outline-primary">View Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+    </section>
+{% endblock %}

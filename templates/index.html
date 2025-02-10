@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay">
+            <h1 class="display-4 fw-bold">NASA Earth Action Inventory System</h1>
+            <p class="lead">Essential tools, missions, and sensors to observe and maintain our great Earth.</p>
+            
+            <!-- Search Bar -->
+            <form action="{% url 'inventory' %}" method="GET" class="d-flex mt-3 search-bar">
+                <input type="text" name="search" class="form-control form-control-lg" placeholder="Search the inventory...">
+                <button class="btn btn-primary btn-lg ms-2" type="submit">Search</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Gradient Transition -->
+    <div class="gradient-transition"></div>
+
+    <!-- Placeholder for Future Content -->
+    <section class="container py-5 text-center">
+        <h2>Explore the Inventory</h2>
+        <p class="text-muted">Browse missions, sensors, applications, and tools that help us observe our planet.</p>
+    </section>
+{% endblock %}
+
+{% block extra_css %}
+    <style>
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            background: url("{% static 'images/nasa-hero.jpg' %}") no-repeat center center;
+            background-size: cover;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        .search-bar {
+            max-width: 600px;
+            width: 100%;
+        }
+        /* Gradient Transition */
+        .gradient-transition {
+            height: 100px;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), white);
+        }
+    </style>
+{% endblock %}
