@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
-from nesis_app.models import CustomerOrganization, Mission, Application
+from nesis_app.models import CustomerOrganization, Mission, Application, Partner
 
 
 class CustomerOrganizationForm(forms.ModelForm):
@@ -30,7 +30,10 @@ class CustomerOrganizationForm(forms.ModelForm):
             'last_interaction_date': forms.TextInput(attrs={'class': 'form-control'}),
             'stakeholder_type': forms.Select(choices=CHOICES, attrs={'class': 'form-control'}),
             'value_for_nasa': forms.Textarea(attrs={'class': 'form-control'}),
-            'downstream_partners': forms.TextInput(attrs={'class': 'form-control'}),
+            'downstream_partners': forms.ModelMultipleChoiceField(
+                queryset=Partner.objects.all(),
+                widget=forms.CheckboxSelectMultiple
+            ),
             'missions':   forms.ModelMultipleChoiceField(
                 queryset=Mission.objects.all(),
                 widget=forms.CheckboxSelectMultiple

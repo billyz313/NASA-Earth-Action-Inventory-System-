@@ -102,6 +102,9 @@ class Mission(models.Model):
 class Partner(models.Model):
     partner_id = models.CharField(max_length=100, default="", help_text="Partner ID")
 
+    def __str__(self):
+        return self.partner_id
+
 class CustomerOrganization(models.Model):
     CHOICES = (
         ('Option1', 'Option1'),

@@ -78,7 +78,14 @@
                                 </div>
 
                                  <div class="mb-3 common"> Downstream partners
-                                {{ form.downstream_partners }}
+                                       <ul  class="list-group">
+                                        {% for id, value in form.downstream_partners.field.choices %}
+                                            <li  class="list-group-item">
+                                                <input type="checkbox" name="downstream_partners" value="{{ id }}" id="downstream_partners_{{ id }}">
+                                                <label for="downstream_partners_{{ id }}">{{ value }}</label>
+                                            </li>
+                                        {% endfor %}
+                                        </ul>
                                 </div>
                                  <div class="mb-3 common"> Engaged missions:
                                     <ul  class="list-group">
