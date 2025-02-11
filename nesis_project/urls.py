@@ -18,12 +18,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from nesis_app import views
+from nesis_app.views import CreateCustomerOrganization
 from nesis_project import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', include('nesis_app.urls')),
     path('login', views.login),
+    path('customer-orgs/add/', CreateCustomerOrganization.as_view(), name='create-customer-organization'),
     path('accounts/', include('allauth.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

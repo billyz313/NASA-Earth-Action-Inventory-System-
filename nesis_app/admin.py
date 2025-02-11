@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Asset, CRMUser, CRMInteraction
+from .models import Asset, CRMUser, CRMInteraction, Mission, Application
+
 
 class CRMUserAdmin(admin.ModelAdmin):
     list_display = ('last_name', 'email', 'organization', 'created_at')
@@ -20,3 +21,11 @@ class AssetAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'status', 'launch_date')
     search_fields = ('name', 'category')
     list_filter = ('category', 'status')
+
+class MissionAdmin(admin.ModelAdmin):
+    list_display=('mission_id',)
+admin.site.register(Mission,MissionAdmin)
+
+class ApplicationAdmin(admin.ModelAdmin):
+    list_display=('app_id',)
+admin.site.register(Application,ApplicationAdmin)

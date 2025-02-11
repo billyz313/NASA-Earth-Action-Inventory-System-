@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load i18n %}
+
+{% load socialaccount %}
+
+{% load static %}
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Customer Org</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+
+    <div class="container-fluid">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-sm-6 mb-4 justify-content-center">
+                <form id="upload-aoi-new" method="POST" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+
+                    <h3 class="section-heading text-uppercase text-center" style="margin-top:50px">
+                        <div></div>
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li  {% if message.tags %} class="text-danger small {{ message.tags }} " {% endif %}> {{ message }} </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                            Add Customer organization
+
+                            </h3>
+
+
+                            <div id="new_org" class=" ">
+
+                                <div class="mb-3 common"><label>Organization Name </label>
+                                    {{ form.name }}
+                                </div>
+
+                                <div class="mb-3 common"><label style="display: block">Acronym
+                                    </label>
+                                    {{ form.acronym }}
+                                </div>
+
+                                <div class="mb-3 common"><label style="display: block">Country
+                                </label>
+                                    {{ form.country }}
+                                </div>
+
+                                <div class="mb-3 common"><label style="display: block">Address
+                                </label>
+                                    {{ form.address }}
+                                </div>
+
+                                <div class="mb-3 common"> URL
+                                {{ form.url }}
+                                </div>
+
+                                <div class="mb-3 common">  Date of last interaction
+                                {{ form.last_interaction_date }}
+                                </div>
+
+                                <div class="mb-3 common">  Type of stakeholder
+                                {{ form.stakeholder_type }}
+                                </div>
+
+                                 <div class="mb-3 common"> Value for NASA
+                                {{ form.value_for_nasa }}
+                                </div>
+
+                                 <div class="mb-3 common"> Downstream partners
+                                {{ form.downstream_partners }}
+                                </div>
+                                 <div class="mb-3 common"> Engaged missions:
+                                    <ul  class="list-group">
+                                    {% for id, value in form.missions.field.choices %}
+                                        <li  class="list-group-item">
+                                            <input type="checkbox" name="missions" value="{{ id }}" id="missions_{{ id }}">
+                                            <label for="missions_{{ id }}">{{ value }}</label>
+                                        </li>
+                                    {% endfor %}
+                                    </ul>
+                                </div>
+                                 <div class="mb-3 common"> Role for mission
+                                {{ form.role_for_mission }}
+                                </div>
+                                 <div class="mb-3 common"> Engaged applications
+                                     <ul  class="list-group">
+                                    {% for id, value in form.applications_used.field.choices %}
+                                        <li  class="list-group-item">
+                                            <input type="checkbox" name="applications_used" value="{{ id }}" id="applications_used_{{ id }}">
+                                            <label for="applications_used_{{ id }}">{{ value }}</label>
+                                        </li>
+                                    {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="mb-3 common"> Role per application
+                                {{ form.role_per_application }}
+                                </div>
+                                <div class="mb-3 common"> Points of contact
+                                     <ul  class="list-group">
+                                        {% for id, value in form.point_of_contact.field.choices %}
+                                            <li  class="list-group-item">
+                                                <input type="checkbox" name="point_of_contact" value="{{ id }}" id="point_of_contact_{{ id }}">
+                                                <label for="point_of_contact_{{ id }}">{{ value }}</label>
+                                            </li>
+                                        {% endfor %}
+                                        </ul>
+                                </div>
+                                <div class="mb-3 common"> Organization needs
+                                {{ form.organization_needs }}
+                                </div>
+
+                                <div class="text-center mt-3">
+                                <input id="submit_org" type="button" class="btn-primary btn" value="Submit Data" onclick=""/>
+
+
+                                </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+<!-- Bootstrap core JS-->
+
+</body>
+</html>

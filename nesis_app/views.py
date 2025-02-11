@@ -1,5 +1,11 @@
+from django.contrib import messages
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Asset
+from django.urls import reverse
+from django.views.generic import CreateView, UpdateView
+
+from .forms import CustomerOrganizationForm
+from .models import Asset, CustomerOrganization
 
 
 def index(request):
@@ -36,3 +42,46 @@ def asset_detail(request, asset_id):
 
 def hold_route(request):
     return render(request, 'index.html')
+
+def customer_organizations(request):
+    return render(request,'customer_organization.html')
+
+
+class CreateCustomerOrganization(CreateView):
+    model = CustomerOrganization
+    form_class = CustomerOrganizationForm
+    template_name = "customer_organization.html"
+    success_url = '/'
+
+    def get_context_data(self, **kwargs):
+        data = super(CreateCustomerOrganization, self).get_context_data(**kwargs)
+        if self.request.POST:
+            data['form'] = CustomerOrganizationForm(self.request.POST)
+
+        else:
+            data['form'] = CustomerOrganizationForm()
+        return data
+
+    def get_success_url(self):
+        return reverse("/")
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        self.object = form.save()
+        org = CustomerOrganization.objects.get(name=form.instance.name)
+        org.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form):
+        if not form.is_valid():
+            messages.error(self.request,
+                           "You already have same object")
+            return render(self.request, self.template_name,
+                          {'form': form})
