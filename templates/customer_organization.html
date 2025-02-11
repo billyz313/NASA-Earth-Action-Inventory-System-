@@ -90,37 +90,37 @@
                                         {% endfor %}
                                         </ul>
                                 </div>
-                                 <div class="mb-3 common"> Engaged missions:
+                                 <div class="mb-3 p-4 common form-control"> Engaged missions:
 
-                                <table id="myTable" class="display">
+                                <table id="orgTable" class="display">
                                     <thead>
                                         <tr>
+                                            <th></th>
                                             <th>Mission</th>
                                             <th>Role</th>
-                                            <th></th>
-                                            <th></th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
                                     {% for id, value in form.missions.field.choices %}
                                         <tr>
+                                          <td>
+
+                                                    <button class="btn btn-secondary btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+
+                                                    <button class="btn btn-secondary btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></button>
+
+                                            </td>
                                             <td><label for="missions_{{ id }}">{{ value }}</label></td>
                                             <td>Role</td>
-                                            <td>
-                                     
-                                                    <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button>
-                                            </td>
-                                               <td>
-                                                    <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
-                                                </td>
+
                                            </tr>
                                          {% endfor %}
                                     </tbody>
                                 </table>
+                                  <input type="button" class="btn btn-primary" id="save_year" value="Add new mission"
+                                       onclick="">
                                  </div>
-                                 <div class="mb-3 common"> Role for mission
-                                {{ form.role_for_mission }}
-                                </div>
                                  <div class="mb-3 common"> Engaged applications
                                      <ul  class="list-group">
                                     {% for id, value in form.applications_used.field.choices %}
@@ -161,7 +161,12 @@
     </div>
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
     <script>
-        let table = new DataTable('#myTable');
+       var table = $("#orgTable").DataTable({
+                       "paging": false,
+                       "searching": false,
+                        columnDefs: [{ width: '20%', targets: 0 }]
+                    });
+
     </script>
 </body>
 </html>
