@@ -111,26 +111,22 @@ class CustomerOrganization(models.Model):
         ('Option1', 'Option1'),
         ('Option2', 'Option2'),
     )
-
     org_id = models.CharField(max_length=100, default="", help_text="Organization ID")
     name = models.TextField(default="", help_text="Organization Name")
-
     acronym = models.CharField(max_length=200, default="", blank=True)
     country = models.CharField(max_length=10, default="Private", help_text="Access Level", choices=COUNTRIES)
-
     address = models.TextField()
-
-    url =  models.CharField(max_length=200, default="", blank=True)
-    last_interaction_date=models.DateTimeField( help_text="Last Interaction Date")
+    url = models.CharField(max_length=200, default="", blank=True)
+    last_interaction_date = models.DateTimeField( help_text="Last Interaction Date")
     stakeholder_type = models.CharField(max_length=10, default="Private", help_text="Access Level", choices=CHOICES)
     value_for_nasa = models.TextField()
-    downstream_partners=models.ManyToManyField(Partner)
-    missions=models.ManyToManyField(Mission)
-    role_for_mission=models.CharField(max_length=100, default="")
-    applications_used=models.ManyToManyField(Application)
-    role_per_application=models.TextField()
-    point_of_contact=models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    organization_needs=models.TextField()
+    downstream_partners = models.ManyToManyField(Partner)
+    missions = models.ManyToManyField(Mission)
+    role_for_mission = models.CharField(max_length=100, default="")
+    applications_used = models.ManyToManyField(Application)
+    role_per_application = models.TextField()
+    point_of_contact = models.ManyToManyField(User)
+    organization_needs = models.TextField()
 
     class Meta:
         verbose_name_plural = "Customer Organizations"
