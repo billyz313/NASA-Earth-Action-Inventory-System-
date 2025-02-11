@@ -39,3 +39,4 @@ node_modules/
 # MacOS and Linux system files
 .DS_Store
 Thumbs.db
+data.json

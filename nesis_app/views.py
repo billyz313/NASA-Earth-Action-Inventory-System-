@@ -1,9 +1,13 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Asset
 
 
 def index(request):
     return render(request, 'index.html')
+
+def login(request):
+    response = redirect('accounts/google/login/')
+    return response
 
 
 def inventory(request):
