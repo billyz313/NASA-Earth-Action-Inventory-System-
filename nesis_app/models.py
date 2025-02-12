@@ -113,12 +113,17 @@ class Partner(models.Model):
 
 class CustomerOrganization(models.Model):
     CHOICES = (
-        ('Option1', 'Option1'),
-        ('Option2', 'Option2'),
+        ('CoDev', 'Co-development Partner'),
+        ('Sci', 'Scientific Partner'),
+        ('Tech', 'Technology Partner'),
+        ('User', 'End User'),
+        ('Other', 'Other')
     )
     COUNTRIES = (
-        ('Option1', 'Option1'),
-        ('Option2', 'Option2'),
+        ('USA', 'USA'),
+        ('CAN', 'Canada'),
+        ('MEX', 'Mexico'),
+        ('OTH', 'Other'),
     )
     org_id = models.CharField(max_length=100, default="", help_text="Organization ID")
     name = models.TextField(default="", help_text="Organization Name")
@@ -126,7 +131,7 @@ class CustomerOrganization(models.Model):
     country = models.CharField(max_length=10, default="Private", help_text="Access Level", choices=COUNTRIES)
     address = models.TextField()
     url = models.CharField(max_length=200, default="", blank=True)
-    last_interaction_date = models.DateTimeField( help_text="Last Interaction Date")
+    last_interaction_date = models.DateField()
     stakeholder_type = models.CharField(max_length=10, default="Private", help_text="Access Level", choices=CHOICES)
     value_for_nasa = models.TextField()
     downstream_partners = models.ManyToManyField(Partner)
