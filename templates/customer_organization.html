@@ -118,21 +118,62 @@
                                          {% endfor %}
                                     </tbody>
                                 </table>
-                                  <input type="button" class="btn btn-primary" id="save_year" value="Add new mission"
+
+                                    <label>Select mission</label>
+                                       <select  class="form-select">
+                                        {% for id, value in form.missions.field.choices %}
+                                            <option  value="missions_{{ id }}">{{ value }}
+
+                                            </option>
+                                        {% endfor %}
+                                        </select>
+                                    <label>Select role for the mission</label>
+                                    <input class="form-control" type="text" id="new_role_for_mission"/>
+                                  <input type="button" class="btn btn-primary mt-2" id="save_mission" value="Add to list"
                                        onclick="">
                                  </div>
-                                 <div class="mb-3 common"> Engaged applications
-                                     <ul  class="list-group">
+                                 <div class="mb-3 common p-4 form-control"> Engaged applications:
+
+                                  <table id="appTable" class="display">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Application</th>
+                                            <th>Role</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                     {% for id, value in form.applications_used.field.choices %}
-                                        <li  class="list-group-item">
-                                            <input type="checkbox" name="applications_used" value="{{ id }}" id="applications_used_{{ id }}">
-                                            <label for="applications_used_{{ id }}">{{ value }}</label>
-                                        </li>
-                                    {% endfor %}
-                                    </ul>
-                                </div>
-                                <div class="mb-3 common"> Role per application
-                                {{ form.role_per_application }}
+                                        <tr>
+                                          <td>
+
+                                                    <button class="btn btn-secondary btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+
+                                                    <button class="btn btn-secondary btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></button>
+
+                                            </td>
+                                            <td><label for="applications_used_{{ id }}">{{ value }}</label></td>
+                                            <td>Role</td>
+
+                                           </tr>
+                                         {% endfor %}
+                                    </tbody>
+                                </table>
+                                  <label>Select application</label>
+                                 <select  class="form-select">
+                                        {% for id, value in form.applications_used.field.choices %}
+                                              <option  value="applications_used_{{ id }}">{{ value }}
+
+                                            </option>
+                                        {% endfor %}
+                                        </select>
+                                    <label>Select role for the application</label>
+                                    <input class="form-control" type="text" id="new_role_for_app"/>
+
+                                  <input type="button" class="btn btn-primary mt-2" id="save_application" value="Add to list"
+                                       onclick="">
+
                                 </div>
                                 <div class="mb-3 common"> Points of contact
                                      <ul  class="list-group">
@@ -161,11 +202,16 @@
     </div>
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
     <script>
-       var table = $("#orgTable").DataTable({
+       var mission_table = $("#orgTable").DataTable({
                        "paging": false,
                        "searching": false,
                         columnDefs: [{ width: '20%', targets: 0 }]
                     });
+        var app_table = $("#appTable").DataTable({
+                   "paging": false,
+                   "searching": false,
+                    columnDefs: [{ width: '20%', targets: 0 }]
+                });
 
     </script>
 </body>
