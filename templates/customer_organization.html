@@ -128,8 +128,13 @@
                                         {% endfor %}
                                         </select>
                                     <label>Select role for the mission</label>
-                                    <input class="form-control" type="text" id="new_role_for_mission"/>
-                                  <input type="button" class="btn btn-primary mt-2" id="save_mission" value="Add to list"
+                                    <select  class="form-select">
+                                        {% for id, value in form.role_for_mission.field.choices %}
+                                              <option  value="role_for_mission_{{ id }}">{{ value }}
+
+                                            </option>
+                                        {% endfor %}
+                                        </select>                                  <input type="button" class="btn btn-primary mt-2" id="save_mission" value="Add to list"
                                        onclick="">
                                  </div>
                                  <div class="mb-3 common p-4 form-control"> Engaged applications:
@@ -169,7 +174,13 @@
                                         {% endfor %}
                                         </select>
                                     <label>Select role for the application</label>
-                                    <input class="form-control" type="text" id="new_role_for_app"/>
+                                    <select  class="form-select">
+                                        {% for id, value in form.role_for_mission.field.choices %}
+                                              <option  value="role_for_mission_{{ id }}">{{ value }}
+
+                                            </option>
+                                        {% endfor %}
+                                        </select>
 
                                   <input type="button" class="btn btn-primary mt-2" id="save_application" value="Add to list"
                                        onclick="">

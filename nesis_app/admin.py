@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Asset, CRMUser, CRMInteraction, Mission, Application, Partner
+from .models import Asset, CRMUser, CRMInteraction, Mission, Application, Partner, Role
 
 
 class CRMUserAdmin(admin.ModelAdmin):
@@ -25,6 +25,10 @@ class AssetAdmin(admin.ModelAdmin):
 class MissionAdmin(admin.ModelAdmin):
     list_display=('mission_id',)
 admin.site.register(Mission,MissionAdmin)
+
+class RoleAdmin(admin.ModelAdmin):
+    list_display=('role_id',)
+admin.site.register(Role,RoleAdmin)
 
 class ApplicationAdmin(admin.ModelAdmin):
     list_display=('app_id',)

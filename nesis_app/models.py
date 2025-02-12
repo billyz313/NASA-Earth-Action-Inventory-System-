@@ -98,6 +98,12 @@ class Mission(models.Model):
     def __str__(self):
         return self.mission_id
 
+class Role(models.Model):
+    role_id = models.CharField(max_length=100, default="", help_text="Role ID")
+
+    def __str__(self):
+        return self.role_id
+
 
 class Partner(models.Model):
     partner_id = models.CharField(max_length=100, default="", help_text="Partner ID")
@@ -125,7 +131,7 @@ class CustomerOrganization(models.Model):
     value_for_nasa = models.TextField()
     downstream_partners = models.ManyToManyField(Partner)
     missions = models.ManyToManyField(Mission)
-    role_for_mission = models.CharField(max_length=100, default="")
+    role_for_mission = models.ManyToManyField(Role)
     applications_used = models.ManyToManyField(Application)
     role_per_application = models.TextField()
     point_of_contact = models.ManyToManyField(User)
